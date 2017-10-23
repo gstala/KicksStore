@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link href="/css/non-responsive.css" rel="stylesheet"/>
+
+    <link href="/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet"/>
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<p>Dear <span th:text="${user.firstName}"></span>,</p>
+<p>Thank you for shopping from our store. We hope you had a good time with our service!</p>
+<p>Your order number is: <strong>#<span th:text="${order.id}"></span></strong>. Here is your order detail:</p>
+<h2>Order Detail for purchase #<span th:text="${order.id}"></span></h2>
+<hr/>
+
+<p>
+    <strong>Recipient : </strong>
+    <span th:text="${order.shippingAddress.shippingAddressName}"></span>
+</p>
+<p>
+    <strong>Shipping Address : </strong>
+    <span th:text="${order.shippingAddress.shippingAddressStreet + ' '}"></span>
+    <span th:text="${order.shippingAddress.shippingAddressZipcode} + ' '"></span>
+    <span th:text="${order.shippingAddress.shippingAddressCity} + ' '"></span>
+</p>
+<p>
+    <strong>Payment Method : </strong>
+    <span th:text="${order.paymentMethod} == 'CASH_ON_DELIVERY'? 'Cash on delivery'"></span>
+    <span th:text="${order.paymentMethod} == 'BANK_TRANSFER'? 'Bank Transfer, account number 999999999999999'"></span>
+</p>
+<p>
+    <strong>Shipping Method : </strong>
+    <span th:text="${order.shippingMethod} == 'ECONOMIC_PARCEL'? 'Economic Parcel'"></span>
+    <span th:text="${order.shippingMethod} == 'PRIORITY_PARCEL'? 'Priority Parcel'"></span>
+</p>
+
+<h3><strong>Order Summary</strong></h3>
+<table>
+    <thead>
+    <tr>
+        <td><strong>Item Name</strong></td>
+        <td class="text-center"><strong>Item Price</strong></td>
+        <td class="text-center"><strong>Item Quantity</strong></td>
+        <td class="text-right"><strong>Total</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cartItem : ${cartItemList}">
+        <td><span data-th-text="${cartItem.product.name}"></span>, size <span
+                data-th-text="${cartItem.size.sizeEUR}"></span></td>
+        <td class="text-center" data-th-text="${cartItem.product.ourPrice}"></td>
+        <td class="text-center" data-th-text="${cartItem.qty}"></td>
+        <td class="text-right" data-th-text="${cartItem.subtotal}"></td>
+    </tr>
+    <tr>
+        <td class="emptyrow"></td>
+        <td class="emptyrow"></td>
+        <td class="emptyrow text-center"><strong>Delivery</strong></td>
+        <td class="emptyrow text-right" data-th-text="${#numbers.formatDecimal(shippingMethod.cost,0,2)}"></td>
+    </tr>
+    <tr>
+        <td class="highrow"></td>
+        <td class="highrow"></td>
+        <td class="highrow text-center"><strong>Total</strong></td>
+        <td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<p>Best,</p>
+<p>KickStore</p>
+</body>
+</html>

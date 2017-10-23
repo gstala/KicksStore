@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div th:replace="common/header :: navbar"/>
+
+<div class="container">
+    <div class="row" style="margin-top: 60px;">
+        <div class="col-xs-3">
+            <h3><label for="category">Category</label></h3>
+            <div class="list-group" id="category">
+                <a th:href="@{/productList(category='all')}" th:classappend="${activeAll}? 'active'"
+                   class="list-group-item">All</a>
+                <a th:href="@{/searchByCategory(category='Running')}" th:classappend="${activeRunning}? 'active'"
+                   class="list-group-item">Running</a>
+                <a th:href="@{/searchByCategory(category='Casual')}" th:classappend="${activeCasual}? 'active'"
+                   class="list-group-item">Casual</a>
+                <a th:href="@{/searchByCategory(category='Basketball')}" th:classappend="${activeBasketball}? 'active'"
+                   class="list-group-item">Basketball</a>
+            </div>
+        </div>
+
+        <div class="col-xs-9">
+            <table border="0" id="productList">
+                <thead>
+                <tr>
+                    <th>Products</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="product-item" data-th-each="product : ${productList}">
+                    <td>
+                        <div th:if="${product != null}">
+                            <div class="row" style="margin-bottom: 50px;">
+                                <div class="col-xs-3" style="margin-top: 20px">
+                                    <a th:href="@{/productDetail?id=}+${product.id}"><img
+                                            class="img-responsive"
+                                            th:src="@{/image/product/}+${product.id}+'.png'"/></a>
+                                </div>
+                                <div class="col-xs-9">
+                                    <a th:href="@{/productDetail?id=}+${product.id}" style="color: black"><h4
+                                            style="font-weight: bold"
+                                            th:text="${product.name}"></h4></a>
+                                    <p th:text="${product.producer}"></p>
+
+                                    <a th:href="@{/productDetail?id=}+${product.id}" style="color: #db3208"><span
+                                            style="font-size: x-large;">$<span
+                                            th:text="${#numbers.formatDecimal(product.ourPrice, 0 , 'COMMA', 2, 'POINT')}"></span></span></a>
+
+                                    <span style="text-decoration: line-through;">$<span
+                                            th:text="${#numbers.formatDecimal(product.listPrice, 0 , 'COMMA', 2, 'POINT')}"></span></span>
+
+                                    <p th:utext="${#strings.abbreviate(product.description, 250)}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- end of container -->
+<div th:replace="common/header :: footer"/>
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+<script>
+    $(document).ready(function () {
+        $('#productList').DataTable({
+            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+            "ordering": false,
+            stateSave: true
+        });
+
+        $("#productList").on('page.dt', function () {
+            $('html, body').animate({
+                scrollTop: $('#productList').offset().top
+            }, 200);
+        });
+    });
+</script>
+</body>
+</html>

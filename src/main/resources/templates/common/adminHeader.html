@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="admin-header">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>KicksStore Admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/non-responsive.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <!--logo-->
+    <link rel="icon" th:href="@{/image/logo.png}"/>
+
+    <!-- data table -->
+    <link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet"/>
+
+    <!--font awesome-->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({selector: 'textarea'});</script>
+
+</head>
+
+<body>
+<div th:fragment="admin-navbar">
+    <nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a th:href="@{/}">
+                    <img th:src="@{/image/brand.png}" class="img-responsive navbar-brand myIcon"/>
+                </a>
+            </div>
+            <div id="navbar">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="dropdown myListItem">
+                        <a th:href="@{/}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false"><span class="myText">Admin </span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/admin/add}">Add new product</a></li>
+                            <li><a th:href="@{/admin/productList}">View products list</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="myListItem">
+                        <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><span
+                                class="myText">Logout</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!--footer-->
+<div th:fragment="admin-footer">
+    <footer class="footer">
+        <div class="copyright">
+            <div class="col-md-6">
+                <p>© 2017 - All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div th:fragment="body-bottom-scripts">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+    <script th:src="@{/js/bootbox.min.js}"></script>
+
+    <!-- data table -->
+    <script th:src="@{/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="common-header">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+    <title>KicksStore - best shoes on the planet</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/non-responsive.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <!--logo-->
+    <link rel="icon" th:href="@{/image/logo.png}"/>
+
+    <!-- data table -->
+    <link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet"/>
+
+    <!--font awesome-->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+
+</head>
+
+<body>
+<div th:fragment="navbar">
+    <nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a th:href="@{/}">
+                    <img th:src="@{/image/brand.png}" class="img-responsive navbar-brand myIcon"/>
+                </a>
+            </div>
+            <div id="navbar">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="dropdown myListItem">
+                        <a th:href="@{/}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false"><span class="myText">Products </span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/productList}">Browse product</a></li>
+                            <li><a th:href="@{/hours}">Store hours &#38; Directions</a></li>
+                            <li><a th:href="@{/faq}">FAQ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form" th:action="@{/searchProduct}" method="post">
+                    <div class="form-group">
+                        <input type="text" name="keyword" class="form-control"
+                               placeholder="Product name"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="myListItem" th:classappend="${classActiveShoppingCart}? 'myListItemActive'">
+                        <a th:href="@{/shoppingCart/cart}" class="myLink"><span class="myText">Shopping Cart</span></a>
+                    </li>
+                    <li class="myListItem">
+                        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="myLink"><span class="myText">My Account</span></a>
+                    </li>
+                    <li class="myListItem">
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}" class="myLink"><span
+                                class="myText">Admin Page</span></a>
+                    </li>
+                    <li class="myListItem" th:classappend="${classActiveMyAccount}? 'myListItemActive'">
+                        <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/myProfile}" class="myLink"><span
+                                class="myText">My Account</span></a>
+                    </li>
+                    <li class="myListItem">
+                        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="myLink"><span class="myText">Logout</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!--footer-->
+<div th:fragment="footer" style="margin-top: 70px">
+    <footer class="footer">
+        <div class="row" style="margin-bottom: 20px">
+            <div class="col-xs-3 footerleft">
+                <div class="logofooter">
+                    <a th:href="@{/}">
+                        <img class="img-responsive" src="/image/brand.png" style="width: 100px;"/>
+                    </a>
+                </div>
+                <p>
+                    Author: Grzegorz Stala. <br/>
+                    This site was created for learning programming. Do not use to buy anything.
+                </p>
+            </div>
+            <div class="col-xs-3 paddingtop-bottom">
+                <h6 class="heading7">CONTACT</h6>
+                <ul class="post">
+                    <p>
+                        <i class="fa fa-map-pin"></i> Abc Road 99<br/> City, Counry
+                    </p>
+                    <p>
+                        <i class="fa fa-phone"></i> Phone : 999 999 9999
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope"></i> E-mail : email@gmail.com
+                    </p>
+                </ul>
+            </div>
+            <div class="col-xs-3 paddingtop-bottom">
+                <h6 class="heading7">LINKS</h6>
+                <ul class="footer-ul">
+                    <li><a href="#"> Privacy Policy</a></li>
+                    <li><a href="#"> Terms &#38; Conditions</a></li>
+                    <li><a th:href="@{/faq}"> Frequently Ask Questions</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-3 paddingtop-bottom">
+                <h6 class="heading7">STORE HOURS</h6>
+                <div class="post">
+                    <p>Monday - Saturday: 9:00 - 23:00</p>
+                    <p>Sunday: 10:00 - 22:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="col-md-6">
+                <p>© 2017 - All Rights Reserved</p>
+            </div>
+            <div class="col-md-6">
+                <ul class="bottom_ul">
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Faq's</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div th:fragment="body-bottom-scripts">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+
+    <!-- data table -->
+    <script th:src="@{/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+
+</div>
+</body>
+</html>

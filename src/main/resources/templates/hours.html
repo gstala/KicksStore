@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div th:replace="common/header :: navbar"/>
+
+<div class="container" style="width: 75%">
+    <h2 style="font-family: 'Arial Black';font-size: 20px">Hours &amp; Directions</h2>
+    <img style="float:right;border-radius: 25px" th:src="@{/image/map.png}"/>
+    <div>
+        <div style="margin-top: 3em;">
+            <h4>Monday - Saturday</h4>
+            <p>9:00 - 23:00</p>
+            <h4>Sunday</h4>
+            <p>10:00 - 22:00</p>
+            <h4>Address &amp; Phone</h4>
+            <p>Abc road 99, 99-999 NewCity</p>
+            <p>999 999 999</p>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>
