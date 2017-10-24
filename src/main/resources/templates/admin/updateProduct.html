@@ -108,6 +108,7 @@
                     </div>
                 </div>
 
+                <!--number in stock-->
                 <label class="col-md-2 control-label form-group">Number
                     in stock</label><br/><br/><br/>
                 <div th:each="productSize,status : ${product.productSizeList}" class="form-group">
@@ -116,6 +117,7 @@
                     <div class="col-md-8">
                         <input class="form-control"
                                th:field="*{productSizeList[__${status.index}__].quantity}"/>
+                        <input th:field="*{productSizeList[__${status.index}__].id}" hidden="hidden"/>
                         <input th:field="*{productSizeList[__${status.index}__].size}" hidden="hidden"/>
                         <input th:field="*{productSizeList[__${status.index}__].product}" hidden="hidden"/>
                     </div>

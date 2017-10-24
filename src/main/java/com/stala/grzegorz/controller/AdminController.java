@@ -110,6 +110,7 @@ public class AdminController {
     public String updateProductPost(@ModelAttribute("product") Product product, HttpServletRequest request) {
         productService.save(product);
         System.out.println("UPDATE " + product);
+
         MultipartFile productImage = product.getProductImage();
 
         if (!productImage.isEmpty()) {

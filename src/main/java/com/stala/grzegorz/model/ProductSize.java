@@ -62,4 +62,14 @@ public class ProductSize {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "ProductSize{" +
+                "id=" + id +
+                ", product=" + product.getId() +
+                ", size=" + size.getId() +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
